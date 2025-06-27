@@ -1,0 +1,112 @@
+<mvc:View
+    controllerName="ui5.quickstart.controller.EmployeeInfo"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.m"
+    xmlns:u="sap.m.upload">
+    <Page title="Employee Information">
+        <customHeader>
+            <core:Fragment fragmentName="ui5.quickstart.view.fragment.Header" type="XML"/>
+        </customHeader>
+        <content>
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title="Employee Information"
+                labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                columnsXL="1" columnsL="1" columnsM="1"
+                singleContainerFullSize="false"
+                class="sapUiResponsiveMargin">
+<f:content>
+
+    <!-- First Name -->
+    <Label text="First Name" required="true"/>
+    <Input 
+        value="{employee>/firstName}" 
+        valueState="{validation>/firstNameState}"
+        valueStateText="{validation>/firstNameStateText}"
+        placeholder="Enter first name" 
+        width="100%" 
+        required="true"/>
+
+    <!-- Last Name -->
+    <Label text="Last Name" required="true"/>
+    <Input 
+        value="{employee>/lastName}" 
+        valueState="{validation>/lastNameState}"
+        valueStateText="{validation>/lastNameStateText}"
+        placeholder="Enter last name" 
+        width="100%" 
+        required="true"/>
+
+    <!-- Email -->
+    <Label text="Email" required="true"/>
+    <Input 
+        value="{employee>/email}"
+        valueState="{validation>/emailState}" 
+        valueStateText="{validation>/emailStateText}" 
+        placeholder="Enter email address" 
+        width="100%" 
+        type="Email"
+        required="true"/>
+
+    <!-- Hire Date -->
+    <Label text="Hire Date" required="true"/>
+    <DatePicker 
+        value="{employee>/hireDate}"
+        valueState="{validation>/hireDateState}" 
+        valueStateText="{validation>/hireDateStateText}" 
+        width="100%" 
+        displayFormat="dd MMM yyyy"
+        valueFormat="yyyy-MM-dd"
+        required="true"/>
+
+    <!-- Role -->
+    <Label text="Role" required="true"/>
+    <ComboBox 
+        width="100%" 
+        selectedKey="{employee>/role/ID}"
+        valueState="{validation>/roleState}" 
+        valueStateText="{validation>/roleStateText}"
+        required="true"
+        items="{
+            path: 'roles>/',
+            templateShareable: false
+        }">
+        <core:Item key="{roles>ID}" text="{roles>name}"/>
+    </ComboBox>
+
+    <!-- Department -->
+    <Label text="Department" required="true"/>
+    <ComboBox 
+        width="100%" 
+        selectedKey="{employee>/department/ID}"
+        valueState="{validation>/departmentState}" 
+        valueStateText="{validation>/departmentStateText}"
+        required="true"
+        items="{
+            path: 'departments>/',
+            templateShareable: false
+        }">
+        <core:Item key="{departments>ID}" text="{departments>name}"/>
+    </ComboBox>
+
+    <!-- Salary (read-only) -->
+    <Label text="Salary"/>
+    <Input 
+        value="{employee>/salary}" 
+        width="100%" 
+        editable="false"/>
+
+    <!-- Submit Button -->
+    <Label text=""/>
+    <Button text="Submit" type="Emphasized" press="onSubmit" class="sapUiMediumMarginTop"/>
+</f:content>
+            </f:SimpleForm>
+        </content>
+    </Page>
+</mvc:View>

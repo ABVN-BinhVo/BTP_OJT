@@ -1,0 +1,77 @@
+{
+    "sap.app": {
+        "id": "ui5.quickstart.view",
+        "dataSources": {
+            "employeeService": {
+                "uri": "/employee/", 
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "ui5.quickstart.App",
+            "type": "XML",
+            "id": "app"
+        },
+        "models": {
+            "": {
+                "dataSource": "employeeService",
+                "type": "sap.ui.model.odata.v4.ODataModel",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server"
+                }
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "ui5.quickstart.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                 "transition": "slide",
+                 "controllerPath": "ui5.quickstart.controller",
+                 "bypassed": {
+                    "target": "notFound"
+        }
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "default",
+                    "target": "EmployeeList"
+                },
+                {
+                    "name": "EmployeeInfo",
+                    "pattern": "EmployeeInfo/{id}",
+                    "target": "EmployeeInfo"
+                },
+                {
+                    "name": "EmployeeList",
+                    "pattern": "EmployeeList",
+                    "target": "EmployeeList"
+                }
+            ],
+            "targets": {
+                "EmployeeInfo": {
+                    "viewName": "EmployeeInfo",
+                    "viewId": "EmployeeInfo"
+                },
+                "EmployeeList": {
+                    "viewName": "EmployeeList",
+                    "viewId": "EmployeeList"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+        }
+            }
+        }
+    }
+}

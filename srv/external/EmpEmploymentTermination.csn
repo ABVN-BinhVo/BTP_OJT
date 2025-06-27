@@ -1,0 +1,207 @@
+{
+ "meta": {
+  "creator": "cds-dk 8.9.3"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "EmpEmploymentTermination": {
+   "kind": "service",
+   "@cds.external": true,
+   "@m.IsDefaultEntityContainer": "true"
+  },
+  "EmpEmploymentTermination.EmpEmploymentTermination": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.label": "Employment Details",
+   "@sap.creatable": "false",
+   "@sap.updatable": "false",
+   "@sap.upsertable": "true",
+   "@sap.deletable": "false",
+   "elements": {
+    "endDate": {
+     "key": true,
+     "type": "cds.Date",
+     "@sap.required": "true",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.display.format": "Date",
+     "@sap.label": "Termination Date",
+     "notNull": true
+    },
+    "personIdExternal": {
+     "key": true,
+     "type": "cds.String",
+     "length": 100,
+     "@sap.required": "true",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "Person ID External",
+     "notNull": true
+    },
+    "userId": {
+     "key": true,
+     "type": "cds.String",
+     "length": 100,
+     "@sap.required": "true",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "User ID",
+     "notNull": true
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 100,
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "Created By"
+    },
+    "createdDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "Created Date Time"
+    },
+    "createdOn": {
+     "type": "cds.Date",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.display.format": "Date",
+     "@sap.label": "Created On"
+    },
+    "eventReason": {
+     "type": "cds.LargeString",
+     "@sap.required": "true",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.label": "Event Reason"
+    },
+    "lastDateWorked": {
+     "type": "cds.Date",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.display.format": "Date",
+     "@sap.label": "Last Date Worked"
+    },
+    "lastModifiedBy": {
+     "type": "cds.String",
+     "length": 100,
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "Last Modified By"
+    },
+    "lastModifiedDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.label": "Last Modified Date Time"
+    },
+    "lastModifiedOn": {
+     "type": "cds.Date",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "false",
+     "@sap.visible": "true",
+     "@sap.sortable": "true",
+     "@sap.filterable": "true",
+     "@sap.display.format": "Date",
+     "@sap.label": "Last Modified On"
+    },
+    "newMainEmploymentId": {
+     "type": "cds.LargeString",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.label": "newMainEmploymentId"
+    },
+    "notes": {
+     "type": "cds.String",
+     "length": 4000,
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.label": "Notes"
+    },
+    "okToRehire": {
+     "type": "cds.Boolean",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.label": "OK to Rehire"
+    },
+    "regretTermination": {
+     "type": "cds.Boolean",
+     "@sap.required": "false",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.upsertable": "true",
+     "@sap.visible": "true",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false",
+     "@sap.label": "Regret Termination"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,37 @@
+<mvc:View
+    controllerName="ui5.quickstart.controller.NotFound"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Page title="Not Found" showNavButton="true" navButtonPress="onNavBack">
+        <customHeader>
+            <core:Fragment fragmentName="ui5.quickstart.view.fragment.Header" type="XML"/>
+        </customHeader>
+        <content>
+            <VBox class="sapUiContentPadding" alignItems="Center" justifyContent="Center" height="70%">
+                <core:Icon
+                    src="sap-icon://document"
+                    size="8rem"
+                    color="#0854a0"
+                    class="sapUiMediumMarginBottom">
+                </core:Icon>
+                <Title
+                    text="404 - Page Not Found"
+                    level="H1"
+                    titleStyle="H1"
+                    class="sapUiMediumMarginBottom">
+                </Title>
+                <Text
+                    text="The page you are looking for does not exist or is temporarily unavailable."
+                    class="sapUiMediumMarginBottom">
+                </Text>
+                <Button
+                    text="Back to Employee List"
+                    press="onNavToEmployeeList"
+                    type="Emphasized"
+                    class="sapUiSmallMarginBottom">
+                </Button>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

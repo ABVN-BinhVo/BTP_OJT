@@ -1,0 +1,102 @@
+{
+  "name": "BinhVo_exercise_week2_day2",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap-cloud-sdk/connectivity": "^3",
+    "@sap-cloud-sdk/http-client": "^3",
+    "@sap-cloud-sdk/resilience": "^3",
+    "@sap/cds": "^8",
+    "cors": "^2.8.5",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "ui5-middleware-simpleproxy": "^3.4.2"
+  },
+  "scripts": {
+    "start": "cds watch",
+    "serve": "cds serve"
+  },
+  "cds": {
+    "sql": {
+      "native_hana_associations": false
+    },
+    "name": "ui5.quickstart",
+    "version": "1.0.0",
+    "description": "The UI5 quickstart tutorial",
+    "scripts": {
+      "start": "ui5 serve -o index.html"
+    },
+    "requires": {
+      "auth": {
+        "kind": "basic",
+        "users": {
+          "nhan": {
+            "roles": [
+              "superAdmin"
+            ]
+          },
+          "binh": {
+            "roles": [
+              "Admin"
+            ],
+            "attr": {
+              "companyCode": [
+                "RDC"
+              ]
+            }
+          },
+          "hoang": {
+            "roles": [
+              "Department Lead"
+            ],
+            "attr": {
+              "departmentName": [
+                "RDC"
+              ]
+            }
+          },
+          "anh": {
+            "roles": [
+              "Admin",
+              "Employee"
+            ],
+            "attr": {
+              "companyCode": [
+                "RDC"
+              ],
+              "email": [
+                "bvo@testpjpbabap.com"
+              ]
+            }
+          },
+          "thach": {
+            "roles": [
+              "Employee"
+            ],
+            "attr": {
+              "email": [
+                "thach.bui@testpjpbabap.com"
+              ]
+            }
+          }
+        }
+      },
+      "cors": {
+        "enabled": true,
+        "headers": [
+          "Content-Type",
+          "Authorization",
+          "x-csrf-token"
+        ]
+      }
+    }
+  }
+}

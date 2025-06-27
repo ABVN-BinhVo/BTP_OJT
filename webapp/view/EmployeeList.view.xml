@@ -1,0 +1,81 @@
+<mvc:View
+    controllerName="ui5.quickstart.controller.EmployeeList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Page title="Employee List">
+        <customHeader>
+            <core:Fragment fragmentName="ui5.quickstart.view.fragment.Header" type="XML"/>
+        </customHeader>
+        <content>
+            <VBox class="sapUiResponsiveMargin">
+                <Title text="Employee List" titleStyle="H3" class="sapUiSmallMarginBottom"/>
+                
+                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                    <Label text="Department" width="100px" textAlign="End" class="sapUiTinyMarginEnd"/>
+                    <ComboBox id="departmentFilter" change="onDepartmentFilterChange" width="300px" items="{departments>/}">
+                        <core:Item key="{departments>ID}" text="{departments>name}"/>
+                    </ComboBox>
+                </HBox>
+                
+                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                    <Label text="Role" width="100px" textAlign="End" class="sapUiTinyMarginEnd"/>
+                    <ComboBox id="roleFilter" change="onRoleFilterChange" width="300px" items="{roles>/}">
+                        <core:Item key="{roles>ID}" text="{roles>name}"/>
+                    </ComboBox>
+                </HBox>
+                <Table
+                    id="employeeTable"
+                    items="{path: '/Employees', parameters: { $expand: 'department,role' }}"
+                    alternateRowColors="true"
+                    fixedLayout="false"
+                    width="100%">
+                    <columns>
+                        <Column>
+                            <Text text="Department"/>
+                        </Column>
+                        <Column>
+                            <Text text="First Name"/>
+                        </Column>
+                        <Column>
+                            <Text text="Last Name"/>
+                        </Column>
+                        <Column>
+                            <Text text="Email"/>
+                        </Column>
+                        <Column>
+                            <Text text="Role"/>
+                        </Column>
+                        <Column>
+                            <Text text="Hire Date"/>
+                        </Column>
+                        <Column>
+                            <Text text="Salary"/>
+                        </Column>
+                        <Column>
+                            <Text text="Actions"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation" press="onEmployeePress">
+                            <cells>
+                                <Text text="{department/name}"/>
+                                <Text text="{firstName}"/>
+                                <Text text="{lastName}"/>
+                                <Link text="{email}" href="mailto:{email}"/>
+                                <Text text="{role/name}"/>
+                                <Text text="{hireDate}"/>
+                                <Text text="{salary}"/>
+                                <Button icon="sap-icon://arrow-right" type="Transparent" press="onEmployeePress">
+                                    <customData>
+                                        <core:CustomData key="id" value="{ID}"/>
+                                    </customData>
+                                </Button>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,6 @@
+email,firstName,lastName,hireDate,companyCode,departmentName
+bvo@testpjpbabap.com,Binh,Vo,2023-06-01,RDC,RDC
+nhan.nguyen@testpjpbabap.com,Nhan,Nguyen,2022-03-15,RDC,Finance
+hoang.tran@testpjpbabap.com,Hoang,Tran,2021-09-10,RDC,RDC
+anh.le@testpjpbabap.com,Anh,Le,2024-01-05,RDC,HR
+thach.bui@testpjpbabap.com,Thach,Bui,2023-12-20,RDC,IT
