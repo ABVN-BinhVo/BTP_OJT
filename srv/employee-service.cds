@@ -1,8 +1,13 @@
 using app.employees as db from '../db/schema';
 
+// Define the EmployeeService with projections and annotations
 service EmployeeService @(path: '/employee') {
   entity Roles as projection on db.Roles;
   entity Departments as projection on db.Departments;
+  @restrict: [
+    { grant: '*', to: 'Admin' },
+    { grant: ['READ'], to: 'Viewer' }
+  ]
   entity Employees as projection on db.Employees {
     *,
     role: redirected to Roles,

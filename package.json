@@ -38,54 +38,15 @@
       "auth": {
         "kind": "basic",
         "users": {
-          "nhan": {
+          "viewer":{
             "roles": [
-              "superAdmin"
+              "Viewer"
             ]
           },
-          "binh": {
+          "admin": {
             "roles": [
               "Admin"
-            ],
-            "attr": {
-              "companyCode": [
-                "RDC"
-              ]
-            }
-          },
-          "hoang": {
-            "roles": [
-              "Department Lead"
-            ],
-            "attr": {
-              "departmentName": [
-                "RDC"
-              ]
-            }
-          },
-          "anh": {
-            "roles": [
-              "Admin",
-              "Employee"
-            ],
-            "attr": {
-              "companyCode": [
-                "RDC"
-              ],
-              "email": [
-                "bvo@testpjpbabap.com"
-              ]
-            }
-          },
-          "thach": {
-            "roles": [
-              "Employee"
-            ],
-            "attr": {
-              "email": [
-                "thach.bui@testpjpbabap.com"
-              ]
-            }
+            ]
           }
         }
       },
