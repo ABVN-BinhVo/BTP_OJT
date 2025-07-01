@@ -16,7 +16,8 @@
     "@cap-js/cds-types": "^0.10.0",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8.9.5",
-    "ui5-middleware-simpleproxy": "^3.4.2"
+    "ui5-middleware-simpleproxy": "^3.4.2",
+    "@sap/xssec": "^4"
   },
   "devDependencies": {
     "rimraf": "^5.0.5",
@@ -66,6 +67,11 @@
           "kind": "xsuaa"
         },
         "db": "hana"
+      },
+      "[hybrid]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
       }
     }
   }
