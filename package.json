@@ -12,17 +12,23 @@
     "@sap-cloud-sdk/resilience": "^3",
     "@sap/cds": "^8",
     "cors": "^2.8.5",
-    "express": "^4"
-  },
-  "devDependencies": {
+    "express": "^4",
     "@cap-js/cds-types": "^0.10.0",
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8",
+    "@sap/cds-dk": "^8.9.5",
     "ui5-middleware-simpleproxy": "^3.4.2"
   },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
+  },
   "scripts": {
-    "start": "cds watch",
-    "serve": "cds serve"
+    "start": "cds serve",
+    "serve": "cds serve",
+    "watch-ojt": "cds watch --open ojt/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy BinhVo_exercise_week2_day2 --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "cds": {
     "sql": {
@@ -31,14 +37,11 @@
     "name": "ui5.quickstart",
     "version": "1.0.0",
     "description": "The UI5 quickstart tutorial",
-    "scripts": {
-      "start": "ui5 serve -o index.html"
-    },
     "requires": {
       "auth": {
         "kind": "basic",
         "users": {
-          "viewer":{
+          "viewer": {
             "roles": [
               "Viewer"
             ]
@@ -57,6 +60,12 @@
           "Authorization",
           "x-csrf-token"
         ]
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        },
+        "db": "hana"
       }
     }
   }
