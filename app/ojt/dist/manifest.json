@@ -1,0 +1,91 @@
+{
+    "sap.app": {
+        "_version": "1.65.0",
+        "id": "ojt",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.18.1",
+            "toolsId": "bd0f4a78-1fe0-47d6-b38e-4cf661b73695"
+        },
+        "dataSources": {
+            "employeeService": {
+                "uri": "/employee/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "ojt.view.App",
+            "type": "XML",
+            "id": "App",
+            "async": true
+        },
+        "models": {
+            "": {
+                "dataSource": "employeeService",
+                "type": "sap.ui.model.odata.v4.ODataModel",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server"
+                }
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "ojt.view",
+                "async": true,
+                "viewPath": "ojt.view"
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "default",
+                    "target": "EmployeeList"
+                },
+                {
+                    "name": "EmployeeInfo",
+                    "pattern": "EmployeeInfo/{id}",
+                    "target": "EmployeeInfo"
+                },
+                {
+                    "name": "EmployeeList",
+                    "pattern": "EmployeeList",
+                    "target": "EmployeeList"
+                }
+            ],
+            "targets": {
+                "EmployeeInfo": {
+                    "viewName": "EmployeeInfo",
+                    "viewId": "EmployeeInfo"
+                },
+                "EmployeeList": {
+                    "viewName": "EmployeeList",
+                    "viewId": "EmployeeList"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller","sap/ui/core/UIComponent","sap/ui/core/routing/History"],(o,e,t)=>{"use strict";return o.extend("ojt.controller.NotFound",{onInit:function(){},onNavBack:function(){var o=t.getInstance();var n=o.getPreviousHash();if(n!==undefined){window.history.go(-1)}else{e.getRouterFor(this).navTo("EmployeeList",{},true)}},onNavToEmployeeList:function(){e.getRouterFor(this).navTo("EmployeeList")}})});
+//# sourceMappingURL=NotFound.controller.js.map
