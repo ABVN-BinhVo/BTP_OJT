@@ -67,11 +67,6 @@
           "kind": "xsuaa"
         },
         "db": "hana"
-      },
-      "[hybrid]": {
-        "auth": {
-          "kind": "xsuaa"
-        }
       }
     }
   }
