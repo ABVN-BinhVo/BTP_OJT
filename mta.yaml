@@ -101,15 +101,28 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       config:
-        HTML5Runtime_enabled: false
+        HTML5Runtime_enabled: true
         init_data:
           instance:
             destinations:
+              - Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.FowardAuthToken: true
+                Name: srv-api
+                ProxyType: Internet
+                Type: HTTP
+                URL: ~{srv-api/srv-url}
               - Authentication: NoAuthentication
                 Name: ui5
                 ProxyType: Internet
                 Type: HTTP
                 URL: https://ui5.sap.com
+              - Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.FowardAuthToken: true
+                Name: BinhVo_exercise_week2_day2-srv-api
+                ProxyType: HTTP
+                URL: ~{srv-api/srv-url}
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
