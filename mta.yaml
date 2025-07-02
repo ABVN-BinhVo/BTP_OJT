@@ -9,6 +9,7 @@ modules:
     requires:
       - name: BinhVo_exercise_week2_day2-db
       - name: BinhVo_exercise_week2_day2-auth
+      - name: BinhVo_exercise_week2_day2-destination-service
     provides:
       - name: srv-api
         properties:
@@ -66,6 +67,7 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: BinhVo_exercise_week2_day2-auth
+      - name: BinhVo_exercise_week2_day2-destination-service
     provides:
       - name: app-api
         properties:
