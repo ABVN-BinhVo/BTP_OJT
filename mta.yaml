@@ -7,9 +7,9 @@ modules:
     type: nodejs
     path: gen/srv
     requires:
-      - name: BinhVo_exercise_week2_day2-db
       - name: BinhVo_exercise_week2_day2-auth
-      - name: BinhVo_exercise_week2_day2-destination-service
+      - name: BinhVo_exercise_week2_day2-db
+      - name: BinhVo_exercise_week2_day2-destination
     provides:
       - name: srv-api
         properties:
@@ -19,6 +19,28 @@ modules:
       instances: 1
     build-parameters:
       builder: npm-ci
+  - name: BinhVo_exercise_week2_day2
+    type: approuter.nodejs
+    path: app/router
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv-api
+          url: ~{srv-url}
+      - name: BinhVo_exercise_week2_day2-auth
+      - name: BinhVo_exercise_week2_day2-destination
+      - name: BinhVo_exercise_week2_day2-html5-runtime
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+    parameters:
+      disk-quota: 256M
+      keep-existing-routes: true
+      memory: 256M
   - name: BinhVo_exercise_week2_day2-db-deployer
     type: hdb
     path: gen/db
@@ -26,11 +48,11 @@ modules:
       - name: BinhVo_exercise_week2_day2-db
     parameters:
       buildpack: nodejs_buildpack
-  - name: BinhVo_exercise_week2_day2-app-content
+  - name: BinhVo_exercise_week2_day2-app-deployer
     type: com.sap.application.content
     path: gen
     requires:
-      - name: BinhVo_exercise_week2_day2-repo-host
+      - name: BinhVo_exercise_week2_day2-html5-repo-host
         parameters:
           content-target: true
     build-parameters:
@@ -38,98 +60,65 @@ modules:
       requires:
         - artifacts:
             - ojt.zip
-          name: ojt
+          name: BinhVo_exercise_week2_day2ojt
           target-path: app/
-  - name: ojt
+  - name: BinhVo_exercise_week2_day2ojt
     type: html5
     path: app/ojt
     build-parameters:
       build-result: dist
       builder: custom
       commands:
-        - npm install
-        - npm run build:cf
+        - npm ci
+        - npm run build
       supported-platforms:
         []
-
-  - name: BinhVo_exercise_week2_day2
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: BinhVo_exercise_week2_day2-auth
-      - name: BinhVo_exercise_week2_day2-destination-service
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
 resources:
-  - name: BinhVo_exercise_week2_day2-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
   - name: BinhVo_exercise_week2_day2-auth
     type: org.cloudfoundry.managed-service
     parameters:
       config:
-        tenant-mode: dedicated
-        xsappname: BinhVo_exercise_week2_day2-${org}-${space}
         oauth2-configuration:
           redirect-uris:
             - https://~{app-api/app-uri}/**
+        tenant-mode: dedicated
+        xsappname: BinhVo_exercise_week2_day2-${org}-${space}
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
     requires:
       - name: app-api
-  - name: BinhVo_exercise_week2_day2-repo-host
-    type: org.cloudfoundry.managed-service
+  - name: BinhVo_exercise_week2_day2-db
+    type: com.sap.xs.hdi-container
     parameters:
-      service: html5-apps-repo
-      service-name: BinhVo_exercise_week2_day2-html5-service
-      service-plan: app-host
-  - name: BinhVo_exercise_week2_day2-destination-service
+      service: hana
+      service-plan: hdi-shared
+  - name: BinhVo_exercise_week2_day2-destination
     type: org.cloudfoundry.managed-service
     parameters:
       config:
-        HTML5Runtime_enabled: true
+        HTML5Runtime_enabled: false
         init_data:
           instance:
             destinations:
-              - Authentication: NoAuthentication
-                HTML5.DynamicDestination: true
-                HTML5.FowardAuthToken: true
-                Name: srv-api
-                ProxyType: Internet
-                Type: HTTP
-                URL: ~{srv-api/srv-url}
               - Authentication: NoAuthentication
                 Name: ui5
                 ProxyType: Internet
                 Type: HTTP
                 URL: https://ui5.sap.com
-              - Authentication: NoAuthentication
-                HTML5.DynamicDestination: true
-                HTML5.FowardAuthToken: true
-                Name: BinhVo_exercise_week2_day2-srv-api
-                ProxyType: HTTP
-                URL: ~{srv-api/srv-url}
             existing_destinations_policy: update
-        version: 1.0.0
       service: destination
-      service-name: BinhVo_exercise_week2_day2-destination-service
       service-plan: lite
+  - name: BinhVo_exercise_week2_day2-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: BinhVo_exercise_week2_day2-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

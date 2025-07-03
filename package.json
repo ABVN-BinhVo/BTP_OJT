@@ -20,8 +20,8 @@
     "@sap/xssec": "^4"
   },
   "devDependencies": {
-    "rimraf": "^5.0.5",
-    "mbt": "^1.2.29"
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
   },
   "scripts": {
     "start": "cds serve",
@@ -35,9 +35,7 @@
     "sql": {
       "native_hana_associations": false
     },
-    "name": "ui5.quickstart",
-    "version": "1.0.0",
-    "description": "The UI5 quickstart tutorial",
+   
     "requires": {
       "auth": {
         "kind": "basic",
@@ -54,20 +52,14 @@
           }
         }
       },
-      "cors": {
-        "enabled": true,
-        "headers": [
-          "Content-Type",
-          "Authorization",
-          "x-csrf-token"
-        ]
-      },
       "[production]": {
         "auth": {
           "kind": "xsuaa"
         },
         "db": "hana"
-      }
+      },
+      "destinations": true,
+      "html5-runtime": true
     }
   }
 }
